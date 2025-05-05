@@ -4,8 +4,8 @@ const cool = mysql2.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    port: '3307',
-    database: 'hopihari1'
+    port: '3306',
+    database: 'hopi_hari_db'
 
 });
 
