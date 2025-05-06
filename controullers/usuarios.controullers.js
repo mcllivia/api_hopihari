@@ -1,4 +1,6 @@
 const mysql = require("../mysql");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.atualizarUsuario = async (req, res) => {
     try {
@@ -47,7 +49,7 @@ VALUES (?,?,?,?,?,?);`, [
             req.body.password,
             req.body.birth_date,
             req.body.phone
-] );
+        ]);
 
         return res.status(201).send({
             "Mensagem": "Usuário cadastrado com sucesso",
@@ -59,3 +61,43 @@ VALUES (?,?,?,?,?,?);`, [
 
     }
 }
+exports.login = async (req, res) => {
+    try {
+        const Usuario = await mysql.execute(`
+            SELECT * FROM users WHERE email = ?`, [
+            req.body.email
+
+        ]);
+
+        if (Usuario.length == 0) {
+            return res.status(401).send({
+                "Mensagem": "Usuário não cadastrado",
+            });
+        }
+
+        const match = await bcrypt.compare(req.body.password, Usuario[0].password);
+
+        if (!match) {
+            return res.status(401).send({
+                "Mensagem": "Senha incorreta",
+            });
+        }
+
+        const token = jwt.sign({
+            id: Usuario[0].id,
+            first_name: Usuario[0].first_name,
+            last_name: Usuario[0].last_name,
+            email: Usuario[0].email,
+            birth_date: Usuario[0].birth_date,
+
+        }, 'senhadojwt');
+        return res.status(200).send({
+            "Mensagem": "Usuário autenticado com sucesso",
+            "token": token
+        });
+
+    } catch (error) {
+        return res.status(500).send({ "Error": error });
+
+    }
+}       
