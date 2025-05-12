@@ -33,6 +33,7 @@ exports.atualizarUsuario = async (req, res) => {
 
 exports.cadastrarUsuario = async (req, res) => {
     try {
+        const hash = await bcrypt.hash(req.body.password, 10);
         const resultado = await mysql.execute(`
             INSERT INTO users (
              first_name,
@@ -42,11 +43,11 @@ exports.cadastrarUsuario = async (req, res) => {
              birth_date,
              phone
             )
-VALUES (?,?,?,?,?,?);`, [
+            VALUES (?,?,?,?,?,?);`, [
             req.body.first_name,
             req.body.last_name,
             req.body.email,
-            req.body.password,
+            hash,
             req.body.birth_date,
             req.body.phone
         ]);
