@@ -59,3 +59,22 @@ JOIN
     line ON users.id = line.users_id
 JOIN 
     rides ON line.atracoes_id = rides.id;
+
+-- query que o biston passou select * from hopi_hari_db.line;
+
+insert into hopi_hari_db.line (atracoes_id, users_id) values (8,5);
+
+select tempo_espera from rides where id =8; # 5 min
+select count (users_id) from hopi_hari_db.line where rides_id =8; # 1 pessoa
+
+select
+(select tempo_espera from rides where id = 8)*
+(select count (users_id) from hopi_hari_db.line where rides_id = 8)
+as total_tempo_espera; 
+
+desc notifications;
+insert into notifications (description, rides_id, users_id, status)
+values (concat(tempo_espera, "minutos de espera para o brinquedo"), 8, 5, true); 
+
+-- TESTAR A TRIGGER
+INSERT INTO hopi_hari_db.line (atracoes_id, users_id) VALUES (4, 2);

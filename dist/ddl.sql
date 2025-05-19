@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `hopi_hari_db`.`users` (
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `email` (`email` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8mb4
@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS `hopi_hari_db`.`line` (
   `atracoes_id` INT NOT NULL,
   `created_id` TIMESTAMP NULL,
   PRIMARY KEY (`users_id`, `atracoes_id`),
-  INDEX `fk_users_has_atracoes_atracoes1_idx` (`atracoes_id` ASC) VISIBLE,
-  INDEX `fk_users_has_atracoes_users_idx` (`users_id` ASC) VISIBLE,
+  INDEX `fk_users_has_atracoes_atracoes1_idx` (`atracoes_id` ASC),
+  INDEX `fk_users_has_atracoes_users_idx` (`users_id` ASC),
   CONSTRAINT `fk_users_has_atracoes_atracoes1`
     FOREIGN KEY (`atracoes_id`)
     REFERENCES `hopi_hari_db`.`rides` (`id`),
@@ -89,8 +89,8 @@ CREATE TABLE IF NOT EXISTS `hopi_hari_db`.`notifications` (
   `rides_id` INT NOT NULL,
   `status` TINYINT NOT NULL,
   PRIMARY KEY (`id`, `users_id`, `rides_id`),
-  INDEX `fk_notifications_users1_idx` (`users_id` ASC) VISIBLE,
-  INDEX `fk_notifications_rides1_idx` (`rides_id` ASC) VISIBLE,
+  INDEX `fk_notifications_users1_idx` (`users_id` ASC),
+  INDEX `fk_notifications_rides1_idx` (`rides_id` ASC),
   CONSTRAINT `fk_notifications_rides1`
     FOREIGN KEY (`rides_id`)
     REFERENCES `hopi_hari_db`.`rides` (`id`),
