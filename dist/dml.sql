@@ -78,3 +78,58 @@ values (concat(tempo_espera, "minutos de espera para o brinquedo"), 8, 5, true);
 
 -- TESTAR A TRIGGER
 INSERT INTO hopi_hari_db.line (atracoes_id, users_id) VALUES (4, 2);
+
+-- parte 2
+-- 5 inserts de áreas:
+INSERT INTO areas (name) VALUES ("Aribabiba");
+INSERT INTO areas (name) VALUES ("Kaminda Mundi");
+INSERT INTO areas (name) VALUES ("Wild West");
+INSERT INTO areas (name) VALUES ("Mistieri");
+INSERT INTO areas (name) VALUES ("Infantasia");
+
+-- aribabiba
+INSERT INTO rides (name, tempo_espera, status, id_areas) VALUES
+("Katapul", 10, "aberto", (SELECT id FROM areas WHERE name = "Aribabiba")),
+("Parangolé", 5, "aberto", (SELECT id FROM areas WHERE name = "Aribabiba")),
+("Elektron", 7, "aberto", (SELECT id FROM areas WHERE name = "Aribabiba")),
+("Vambatê", 4, "aberto", (SELECT id FROM areas WHERE name = "Aribabiba")),
+("Aribabobbi", 6, "aberto", (SELECT id FROM areas WHERE name = "Aribabiba")),
+("Cinemotion", 3, "aberto", (SELECT id FROM areas WHERE name = "Aribabiba"));
+
+-- kaminda mundi
+INSERT INTO rides (name, tempo_espera, status, id_areas) VALUES
+("Giranda Mundi", 5, "aberto", (SELECT id FROM areas WHERE name = "Kaminda Mundi")),
+("La Tour Eiffel", 8, "fechado", (SELECT id FROM areas WHERE name = "Kaminda Mundi")),
+("Theatro di Kaminda", 2, "aberto", (SELECT id FROM areas WHERE name = "Kaminda Mundi")),
+("Jogakí di Kaminda", 3, "aberto", (SELECT id FROM areas WHERE name = "Kaminda Mundi")),
+("Cinétrion", 4, "aberto", (SELECT id FROM areas WHERE name = "Kaminda Mundi"));
+
+-- wild west
+INSERT INTO rides (name, tempo_espera, status, id_areas) VALUES
+("Rio Bravo", 15, "aberto", (SELECT id FROM areas WHERE name = "Wild West")),
+("Ghosti Hotel", 10, "aberto", (SELECT id FROM areas WHERE name = "Wild West")),
+("Vamvolari", 6, "aberto", (SELECT id FROM areas WHERE name = "Wild West")),
+("Vulaviking", 7, "aberto", (SELECT id FROM areas WHERE name = "Wild West")),
+("La Mina del Joe Sacramento", 5, "aberto", (SELECT id FROM areas WHERE name = "Wild West")),
+("Namuskita", 3, "aberto", (SELECT id FROM areas WHERE name = "Wild West"));
+
+-- mistieri
+INSERT INTO rides (name, tempo_espera, status, id_areas) VALUES
+("Montezum", 20, "aberto", (SELECT id FROM areas WHERE name = "Mistieri")),
+("Vurang", 15, "aberto", (SELECT id FROM areas WHERE name = "Mistieri")),
+("Ekatomb", 12, "aberto", (SELECT id FROM areas WHERE name = "Mistieri")),
+("Simulákron", 8, "aberto", (SELECT id FROM areas WHERE name = "Mistieri")),
+("Katakumb", 6, "aberto", (SELECT id FROM areas WHERE name = "Mistieri"));
+
+-- infantasia
+INSERT INTO rides (name, tempo_espera, status, id_areas) VALUES
+("Astronavi", 4, "aberto", (SELECT id FROM areas WHERE name = "Infantasia")),
+("Bugabalum", 3, "aberto", (SELECT id FROM areas WHERE name = "Infantasia")),
+("Dispenkito", 2, "aberto", (SELECT id FROM areas WHERE name = "Infantasia")),
+("Giralata", 3, "aberto", (SELECT id FROM areas WHERE name = "Infantasia")),
+("Giranda Pokotó", 2, "aberto", (SELECT id FROM areas WHERE name = "Infantasia")),
+("Kastel di Lendas", 5, "aberto", (SELECT id FROM areas WHERE name = "Infantasia")),
+("Komboio", 4, "aberto", (SELECT id FROM areas WHERE name = "Infantasia")),
+("Pilotinhos", 3, "aberto", (SELECT id FROM areas WHERE name = "Infantasia")),
+("Theatro Klapi Klapi", 2, "aberto", (SELECT id FROM areas WHERE name = "Infantasia")),
+("Toka do Uga", 3, "aberto", (SELECT id FROM areas WHERE name = "Infantasia"));

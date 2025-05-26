@@ -94,7 +94,15 @@ exports.login = async (req, res) => {
         }, 'senhadojwt');
         return res.status(200).send({
             "Mensagem": "Usuário autenticado com sucesso",
-            "token": token
+            "token": token,
+            "user": {
+                "id": Usuario[0].id,
+                "first_name": Usuario[0].first_name,
+                "last_name": Usuario[0].last_name,
+                "email": Usuario[0].email,
+                "birth_date": Usuario[0].birth_date,
+                "phone": Usuario[0].phone
+            }
         });
 
     } catch (error) {
