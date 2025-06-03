@@ -33,6 +33,7 @@ ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `hopi_hari_db`.`rides`
+
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hopi_hari_db`.`rides` (
   `id` INT NOT NULL AUTO_INCREMENT,
